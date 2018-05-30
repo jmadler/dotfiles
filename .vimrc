@@ -1,0 +1,106 @@
+" General behavior
+set nocompatible
+set hidden
+set autoread
+set switchbuf=useopen
+set wildmode=longest,list
+set wildmenu
+set noshowmode
+set noshowcmd
+
+" Plugins
+call plug#begin('~/.vim/plugged')
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'w0rp/ale'
+Plug 'godlygeek/tabular'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'pangloss/vim-javascript'
+Plug 'crusoexia/vim-javascript-lib'
+Plug 'crusoexia/vim-monokai'
+Plug 'mxw/vim-jsx'
+Plug 'flowtype/vim-flow'
+Plug 'junegunn/goyo.vim'
+Plug 'majutsushi/tagbar'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-surround'
+call plug#end()
+
+" Editing
+set nrformats-=octal
+set formatoptions+=j
+
+" Indent
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set shiftround
+set autoindent
+set smarttab
+set smartindent
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
+
+" Files
+set encoding=utf8
+set ffs=unix,dos,mac
+
+" Backup Files
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
+" Disable Nuisances
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
+
+" IDE Display / Sizing
+set background=dark
+set backspace=start,eol,indent
+set linebreak
+set textwidth=500
+set winwidth=79
+set scrolloff=3
+set sidescrolloff=3
+set ruler
+set number
+set foldcolumn=1
+
+" Syntax Higlighting / Theming
+syntax enable
+colorscheme monokai
+let g:ale_sign_column_always = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='molokai'
+
+" Searching
+set incsearch
+set hlsearch
+set ignorecase smartcase
+nnoremap i :noh<cr>i
+
+augroup vimrc
+  autocmd!
+  " Start at the same position each time
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+  " Don't do anything fancy with crlf in the cmd window
+  autocmd! CmdwinEnter * :unmap <cr>
+  autocmd! CmdwinLeave * :call MapCR()
+augroup END
