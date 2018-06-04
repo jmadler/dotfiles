@@ -72,7 +72,7 @@ inoremap <c-w> <c-g>u<c-w>
 set background=dark
 set backspace=start,eol,indent
 set linebreak
-set textwidth=500
+set textwidth=115
 set winwidth=79
 set scrolloff=3
 set sidescrolloff=3
