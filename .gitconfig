@@ -1,0 +1,9 @@
+[user]
+	email = jordan.m.adler@gmail.com
+	name = Jordan Adler
+[alias]
+	sync = !git fetch origin && git rebase origin/master
+[commit]
+	verbose = true
+[core]
+	excludesfile = /Users/jadler/.gitignore
