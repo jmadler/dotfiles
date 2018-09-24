@@ -26,6 +26,8 @@ Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " Editing
