@@ -1,4 +1,18 @@
+
+set -o notify
+shopt -s cdspell
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s extglob
+shopt -s histappend
+shopt -s dirspell
+shopt -s globstar
+
 export EDITOR=vim
+export VISUAL=vim
+export PAGER=less
+export MANPAGER='less -FiRs'
+
 alias ls='ls -GAF'
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
@@ -21,5 +35,5 @@ export HISTFILESIZE=
 export HISTSIZE=
 export HISTTIMEFORMAT="%Y-%m-%d %T "
 export HISTCONTROL=ignoreboth
-export HISTIGNORE=ls:cd
+export HISTIGNORE="&:bg:fg:ls:cd:clear:exit"
 export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
