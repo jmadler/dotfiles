@@ -1,3 +1,8 @@
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 
 set -o notify
 shopt -s cdspell
@@ -14,6 +19,13 @@ export PAGER=less
 export MANPAGER='less -FiRs'
 
 alias ls='ls -GAF'
+export PS1='[\T]\[\e[0;32m\] \w\[\e[0;36m\]$(print_symlink)\[\e[0;31m\]$(parse_git_branch)\[\e[0m\] $ '
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="%Y-%m-%d %T "
+export HISTCONTROL=ignoreboth
+export HISTIGNORE="&:bg:fg:ls:cd:clear:exit"
+
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 function print_symlink {
@@ -29,11 +41,3 @@ function parse_git_branch {
   echo " ("${ref#refs/heads/}")"
 }
 
-export PS1='[\T]\[\e[0;32m\] \w\[\e[0;36m\]$(print_symlink)\[\e[0;31m\]$(parse_git_branch)\[\e[0m\] $ '
-
-export HISTFILESIZE=
-export HISTSIZE=
-export HISTTIMEFORMAT="%Y-%m-%d %T "
-export HISTCONTROL=ignoreboth
-export HISTIGNORE="&:bg:fg:ls:cd:clear:exit"
-export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"

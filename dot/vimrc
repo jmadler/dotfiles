@@ -1,3 +1,15 @@
+" Installation
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs 
+	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+if empty(glob('~/.vim/backup'))
+  silent !mkdir -p ~/.vim/backup
+endif
+
 " General behavior
 set nocompatible
 set hidden
@@ -9,6 +21,7 @@ set noshowmode
 set noshowcmd
 
 " Plugins
+
 call plug#begin('~/.vim/plugged')
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
