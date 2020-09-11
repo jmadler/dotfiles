@@ -2,9 +2,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
-tap "homebrew/php"
-
-cask "java8"
 
 brew "ack"
 brew "bash-completion"
@@ -38,7 +35,6 @@ brew "llvm"
 brew "maven"
 brew "mysql"
 brew "node", link: false
-brew "node@8"
 brew "patchutils"
 brew "pdsh"
 brew "python", link: false
