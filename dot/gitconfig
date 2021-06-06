@@ -2,7 +2,7 @@
 	email = jordan.m.adler@gmail.com
 	name = Jordan Adler
 [alias]
-	sync = !git fetch origin && git rebase origin/master
+	sync = !git fetch origin && git rebase origin/main
 [commit]
 	verbose = true
 [core]
