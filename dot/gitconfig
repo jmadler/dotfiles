@@ -7,3 +7,5 @@
 	verbose = true
 [core]
 	excludesfile = /Users/jadler/.gitignore
+[merge]
+	conflictstyle = zdiff3
