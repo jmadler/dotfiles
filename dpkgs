@@ -1,13 +1,8 @@
 curl
 yarnpkg
 tmux
-scala
-ruby
 pipenv
 python3
-golang-1.14
-erlang
-elixir
 ack
 bash-completion
 build-essential
