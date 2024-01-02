@@ -1,0 +1,6 @@
+export PATH="/opt/homebrew/bin:$PATH"
+export EDITOR=vim
+export VISUAL=vim
+export PAGER=less
+export MANPAGER='less -FiRs'
+alias ls='ls -GAF'
