@@ -1,6 +1,15 @@
-export PATH="/opt/homebrew/bin:$PATH"
+alias ls='ls -GAF'
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 export MANPAGER='less -FiRs'
-alias ls='ls -GAF'
+export PATH=/opt/homebrew/bin:/Users/yarden/promotedai/bin:$PATH
+eval "$(ssh-agent -s)"
+ssh-add
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats '%b '
+setopt PROMPT_SUBST
+PROMPT='%F{green}%*%f %F{red}%~%f %F{blue}${vcs_info_msg_0_}%f$ '
