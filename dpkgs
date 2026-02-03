@@ -1,5 +1,4 @@
 curl
-yarnpkg
 tmux
 pipenv
 python3
