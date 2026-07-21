@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bootstrap a fresh machine: packages, dotfiles, ~/code repos, Claude Code config.
+# Bootstrap a fresh machine: packages, dotfiles, ~/code repos, Claude Code config + skills.
 # Safe to re-run: every step is idempotent.
 set -euo pipefail
 
@@ -21,24 +21,41 @@ for f in "$DOTFILES_DIR"/dot/*; do
 	ln -sfn "$f" "$HOME/.$(basename "$f")"
 done
 
-# 3. Clone personal repos into ~/code (skips any that already exist) --------
+# 3. Clone every personal repo into ~/code -----------------------------------
+# The list is pulled live from GitHub, so there is no manifest to keep in sync.
 mkdir -p "$HOME/code"
-while IFS=$'\t' read -r dir url; do
-	if [ -z "$dir" ]; then continue; fi
-	dest="$HOME/code/$dir"
-	if [ ! -d "$dest/.git" ]; then
-		git clone "$url" "$dest" || echo "skip (clone failed): $dir"
+if command -v gh >/dev/null; then
+	repos="$(gh repo list jmadler --limit 1000 \
+		--json name,sshUrl --jq '.[] | [.name, .sshUrl] | @tsv' 2>/dev/null || true)"
+	if [ -n "$repos" ]; then
+		while IFS=$'\t' read -r name url; do
+			dest="$HOME/code/$name"
+			[ -d "$dest/.git" ] || git clone "$url" "$dest" || echo "skip (clone failed): $name"
+		done <<< "$repos"
+	else
+		echo "gh returned no repos (check 'gh auth status'); skipping clone."
 	fi
-done < "$DOTFILES_DIR/repos.txt"
-
-# 4. Claude Code config -----------------------------------------------------
-mkdir -p "$HOME/.claude"
-ln -sfn "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
-# Global instructions live in the AGENTS.md repo (cloned in step 3).
-if [ -f "$HOME/code/AGENTS.md/AGENTS.md" ]; then
-	ln -sfn "$HOME/code/AGENTS.md/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+else
+	echo "gh not found; skipping repo clone. Install gh, authenticate, and re-run."
 fi
-# Reinstall the enabled plugin from its public marketplace.
+
+# 4. Claude Code: settings, global rules, skills, plugin --------------------
+mkdir -p "$HOME/.claude/skills"
+ln -sfn "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+
+# Global operating rules: use the AGENTS.md repo's own installer.
+if [ -d "$HOME/code/AGENTS.md" ]; then
+	make -C "$HOME/code/AGENTS.md" install
+fi
+
+# Workflow skills: symlink each skill from the pack so repo pulls/edits propagate.
+if [ -d "$HOME/code/agent-cycle-skills/skills" ]; then
+	for s in "$HOME/code/agent-cycle-skills/skills"/*/; do
+		ln -sfn "${s%/}" "$HOME/.claude/skills/$(basename "${s%/}")"
+	done
+fi
+
+# Enabled plugin from its public marketplace.
 if command -v claude >/dev/null; then
 	claude plugin marketplace add anthropics/claude-plugins-official || true
 	claude plugin install frontend-design@claude-plugins-official || true
