@@ -5,11 +5,16 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 export MANPAGER='less -FiRs'
-export PATH=/opt/homebrew/bin:/Users/yarden/promotedai/bin:$PATH
-eval "$(ssh-agent -s)"
-ssh-add
+
+# PATH: homebrew first, then the mysql-client keg (from the live config).
+export PATH="/opt/homebrew/bin:/opt/homebrew/opt/mysql-client@8.4/bin:$PATH"
+
+# git branch in the prompt
 autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats '%b '
 setopt PROMPT_SUBST
 PROMPT='%F{green}%*%f %F{red}%~%f %F{blue}${vcs_info_msg_0_}%f$ '
+
+# rtk / other tools installed under ~/.local
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
