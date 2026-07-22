@@ -43,6 +43,13 @@ fi
 mkdir -p "$HOME/.claude/skills"
 ln -sfn "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 
+# Subagent definitions: symlink each so repo pulls/edits propagate.
+mkdir -p "$HOME/.claude/agents"
+for a in "$DOTFILES_DIR"/claude/agents/*.md; do
+	[ -e "$a" ] || continue
+	ln -sfn "$a" "$HOME/.claude/agents/$(basename "$a")"
+done
+
 # Global operating rules: use the AGENTS.md repo's own installer.
 if [ -d "$HOME/code/AGENTS.md" ]; then
 	make -C "$HOME/code/AGENTS.md" install
