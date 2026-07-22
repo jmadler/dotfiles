@@ -59,6 +59,8 @@ fi
 if command -v claude >/dev/null; then
 	claude plugin marketplace add anthropics/claude-plugins-official || true
 	claude plugin install frontend-design@claude-plugins-official || true
+	claude plugin marketplace add jmadler/claude-skills || true
+	claude plugin install claude-agents@jmadler-skills || true
 fi
 
 # 5. rtk hook into Claude Code (idempotent; rtk owns the generated files) ----
