@@ -16,7 +16,6 @@
       "Bash(git remote *)",
       "Bash(git reset *)",
       "Bash(git rebase *)",
-      "Bash(sed -i *)",
       "Bash(gh auth switch *)",
       "Bash(git worktree *)",
       "Bash(git checkout *)",
@@ -27,7 +26,6 @@
       "Bash(npm run build *)",
       "Bash(npm test)",
       "Bash(yarn build)",
-      "Bash(rm *)",
       "Bash(gcloud config get-value *)",
       "Bash(gcloud logging read *)"
     ],
@@ -44,6 +42,7 @@
       "Bash(git push origin master:*)"
     ],
     "ask": [
+      "Bash(rm *)",
       "Bash(terraform apply:*)",
       "Bash(terraform destroy:*)"
     ],
