@@ -12,12 +12,10 @@
       "Bash(git init *)",
       "Bash(mv *)",
       "Bash(tee *)",
-      "Bash(sed -i *)",
       "Bash(git stash *)",
       "Bash(git remote *)",
       "Bash(git reset *)",
       "Bash(git rebase *)",
-      "Bash(rm *)",
       "Bash(gh auth switch *)",
       "Bash(git worktree *)",
       "Bash(git checkout *)",
@@ -44,6 +42,7 @@
       "Bash(git push origin master:*)"
     ],
     "ask": [
+      "Bash(rm *)",
       "Bash(terraform apply:*)",
       "Bash(terraform destroy:*)"
     ],
