@@ -48,9 +48,37 @@
     ],
     "defaultMode": "auto"
   },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "claude-agents@jmadler-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "jmadler-skills": {
+      "source": {
+        "source": "github",
+        "repo": "jmadler/claude-skills"
+      }
+    }
+  },
   "theme": "auto",
   "autoCompactEnabled": true,
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ]
   }
 }
