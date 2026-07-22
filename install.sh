@@ -49,8 +49,9 @@ if [ -d "$HOME/code/AGENTS.md" ]; then
 fi
 
 # Workflow skills: symlink each skill from the pack so repo pulls/edits propagate.
-if [ -d "$HOME/code/agent-cycle-skills/skills" ]; then
-	for s in "$HOME/code/agent-cycle-skills/skills"/*/; do
+# agent-cycle-skills now lives inside the claude-skills monorepo.
+if [ -d "$HOME/code/claude-skills/agent-cycle-skills/skills" ]; then
+	for s in "$HOME/code/claude-skills/agent-cycle-skills/skills"/*/; do
 		ln -sfn "${s%/}" "$HOME/.claude/skills/$(basename "${s%/}")"
 	done
 fi
