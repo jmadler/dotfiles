@@ -1,0 +1,57 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git pull *)",
+      "Bash(gh pr create *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(ln *)",
+      "Bash(git init *)",
+      "Bash(mv *)",
+      "Bash(tee *)",
+      "Bash(sed -i *)",
+      "Bash(git stash *)",
+      "Bash(git remote *)",
+      "Bash(git reset *)",
+      "Bash(git rebase *)",
+      "Bash(rm *)",
+      "Bash(gh auth switch *)",
+      "Bash(git worktree *)",
+      "Bash(git checkout *)",
+      "Bash(git fetch *)",
+      "Bash(gh run watch *)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run build)",
+      "Bash(npm run build *)",
+      "Bash(npm test)",
+      "Bash(yarn build)",
+      "Bash(gcloud config get-value *)",
+      "Bash(gcloud logging read *)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Bash(git add -A:*)",
+      "Bash(git add .:*)",
+      "Bash(git push*--force*)",
+      "Bash(*--no-verify*)",
+      "Bash(git push origin main:*)",
+      "Bash(git push origin master:*)"
+    ],
+    "ask": [
+      "Bash(terraform apply:*)",
+      "Bash(terraform destroy:*)"
+    ],
+    "defaultMode": "auto"
+  },
+  "theme": "auto",
+  "autoCompactEnabled": true,
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  }
+}
